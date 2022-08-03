@@ -90,7 +90,10 @@ function adicionaTarefa() {
   function removeTarefa() {
     const selecionado = document.querySelector('.selected')
 
-    selecionado.remove()
+    if (selecionado !== null) {
+      selecionado.remove()
+    }
+
   }
   botaoRemover.addEventListener('click', removeTarefa)
 }
