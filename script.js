@@ -1,8 +1,6 @@
-// requisito 5
 const botaoAdicionar = document.getElementById('criar-tarefa');
 const input = document.getElementById('texto-tarefa');
 const listaOl = document.getElementById('lista-tarefas');
-
 
 
 function adicionaTarefa() {
@@ -16,7 +14,6 @@ function adicionaTarefa() {
   listaOl.appendChild(item);
 
 
-
   function mudaFundo(event) {
     const itensLi = document.getElementsByClassName('item')
     
@@ -25,10 +22,20 @@ function adicionaTarefa() {
         itensLi[i].style.backgroundColor = 'white'
       }
     }
-    console.log(itensLi);
     event.target.style.backgroundColor = 'gray'
   }
   item.addEventListener('click', mudaFundo)
+
+
+  function riscaItem(event) {
+    if (event.target.classList.contains('completed')) {
+      event.target.classList.remove('completed')
+    }
+    else {
+      event.target.classList.add('completed')
+    }
+  }
+  item.addEventListener('dblclick', riscaItem)
 }
 
 botaoAdicionar.addEventListener('click', adicionaTarefa);
