@@ -29,29 +29,41 @@ function adicionaTarefa() {
 
   function riscaItem(event) {
     if (event.target.classList.contains('completed')) {
-      event.target.classList.remove('completed')
+      event.target.classList.remove('completed');
     }
     else {
-      event.target.classList.add('completed')
+      event.target.classList.add('completed');
     }
   }
-  item.addEventListener('dblclick', riscaItem)
+  item.addEventListener('dblclick', riscaItem);
 
 
-  const botaoLimpar = document.getElementById('apaga-tudo')
+  const botaoLimpar = document.getElementById('apaga-tudo');
 
   function limpaLista() {
-    const itensLi = document.getElementsByClassName('item')
+    const itensLi = document.getElementsByClassName('item');
 
     if (itensLi.length > 0) {
       for (let i = itensLi.length - 1; i >= 0; i -= 1) {
-        itensLi[i].remove()
+        itensLi[i].remove();
       }
     }
-
   }
+  botaoLimpar.addEventListener('click', limpaLista);
 
-  botaoLimpar.addEventListener('click', limpaLista)
+
+  const botaoCompletos = document.getElementById('remover-finalizados');
+
+  function removeCompletos() {
+    const completos = document.getElementsByClassName('completed');
+
+    if (completos.length > 0) {
+      for (let i = completos.length - 1; i >= 0; i -= 1) {
+        completos[i].remove()
+      }
+    }
+  }
+  botaoCompletos.addEventListener('click', removeCompletos)
 }
 
 botaoAdicionar.addEventListener('click', adicionaTarefa);
