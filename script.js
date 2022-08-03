@@ -36,6 +36,22 @@ function adicionaTarefa() {
     }
   }
   item.addEventListener('dblclick', riscaItem)
+
+
+  const botaoLimpar = document.getElementById('apaga-tudo')
+
+  function limpaLista() {
+    const itensLi = document.getElementsByClassName('item')
+
+    if (itensLi.length > 0) {
+      for (let i = itensLi.length - 1; i >= 0; i -= 1) {
+        itensLi[i].remove()
+      }
+    }
+
+  }
+
+  botaoLimpar.addEventListener('click', limpaLista)
 }
 
 botaoAdicionar.addEventListener('click', adicionaTarefa);
