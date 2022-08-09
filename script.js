@@ -52,8 +52,14 @@ function removeTarefa() {
   }
 }
 
-function itensLocal() {
+function jogaProLocal() {
+  let itens = document.getElementsByClassName('item');
+  let array = JSON.parse(localStorage.getItem('itens'))
 
+  for (let i = 0; i < itens.length; i += 1) {
+    array.push(itens[i].outerHTML)
+  }
+  localStorage.setItem('itens', JSON.stringify(array))
 }
 
 function adicionaTarefa() {
@@ -78,10 +84,25 @@ function adicionaTarefa() {
   botaoCompletos.addEventListener('click', removeCompletos)
   
   const botaoSalvar = document.getElementById('salvar-tarefas'); 
-  botaoSalvar.addEventListener('click', itensLocal);
+  botaoSalvar.addEventListener('click', jogaProLocal);
 
   const botaoRemover = document.getElementById('remover-selecionado');
   botaoRemover.addEventListener('click', removeTarefa)
 }
 
 botaoAdicionar.addEventListener('click', adicionaTarefa);
+
+function pegaDoLocal() {
+  if (localStorage.getItem('itens') === null) {
+    localStorage.setItem('itens', JSON.stringify([]));
+  } else {
+    const itensLista = JSON.parse(localStorage.getItem('itens'))
+    for (let i = 0; i < itensLista.length; i += 1) {
+      listaOl.innerHTML += itensLista[i]
+    }
+  }
+}
+
+window.onload = function() {
+  pegaDoLocal();
+}
