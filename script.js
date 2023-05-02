@@ -1,17 +1,21 @@
 const botaoAdicionar = document.getElementById('criar-tarefa');
 const input = document.getElementById('texto-tarefa');
 const listaOl = document.getElementById('lista-tarefas');
+const botaoLimpar = document.getElementById('apaga-tudo');
+const botaoUp = document.getElementById('mover-cima');
+const botaoDown = document.getElementById('mover-baixo');
+const botaoCompletos = document.getElementById('remover-finalizados');
+const botaoSalvar = document.getElementById('salvar-tarefas'); 
+const botaoRemover = document.getElementById('remover-selecionado');
 
 function mudaFundo(event) {
   const itensLi = document.getElementsByClassName('item')
-  
+
   for (let i = 0; i < itensLi.length; i+= 1){
-    if (itensLi[i].style.backgroundColor == 'gray') {
-      itensLi[i].style.backgroundColor = 'white'
+    if (itensLi[i].classList.contains('selected')) {
       itensLi[i].classList.remove('selected')
     }
   }
-  event.target.style.backgroundColor = 'gray'
   event.target.classList.add('selected')
 }
 
@@ -32,6 +36,8 @@ function limpaLista() {
       itensLi[i].remove();
     }
   }
+
+  localStorage.setItem('itens', JSON.stringify([]))
 }
 
 function removeCompletos() {
@@ -53,10 +59,7 @@ function removeTarefa() {
 }
 
 function jogaProLocal() {
-  // if (localStorage.itens != '[]') {
-  //   localStorage.clear()
-  // }
-
+  localStorage.setItem('itens', JSON.stringify([]))
   let itens = document.getElementsByClassName('item');
   let array = JSON.parse(localStorage.getItem('itens'))
 
@@ -68,16 +71,10 @@ function jogaProLocal() {
 
 function moveUp() {
   let selected = document.querySelector('.selected')
-  // console.log(selected);
-  // console.log(selected == listaOl.children[0]);
-
   let array = []
   for (let ji = 0; ji < listaOl.children.length; ji += 1){
     array.push(listaOl.children[ji])
   }
-  // console.log(array);
-  // console.log(selected == array[0]);
-
   if (selected != listaOl.children[0]) {
     let indexSel;
     for (let i = 0; i < array.length; i += 1) {
@@ -85,27 +82,13 @@ function moveUp() {
         indexSel = i
       }
     }
-    // console.log(indexSel);
-    // console.log(listaOl.children[indexSel]);
-    // console.log(listaOl.children[indexSel-1]);
-  
     let temporary = array[indexSel]
-    // console.log(temporary);
     array[indexSel] = array[indexSel-1]
-    // console.log(array[indexSel]);
     array[indexSel-1] = temporary;
-    // console.log(array[indexSel-1]);
-
-    // console.log(array);
-
-    // console.log(listaOl.children)
     listaOl.innerHTML = ''
-
     for (let k = 0; k < array.length; k += 1){
       listaOl.appendChild(array[k])
     }
-  //   let temporaryClass = listaOl.children[indexSel].innerHTML
-  //   console.log(temporaryClass);
   }
 }
 
@@ -136,37 +119,22 @@ function adicionaTarefa() {
   const item = document.createElement('li');
   item.innerHTML = input.value;
   item.className = 'item'
+  
   listaOl.appendChild(item);
 
   input.value = '';
-
-  listaOl.appendChild(item);
-  // console.log(localStorage.itens);
-  // console.log(listaOl.children);
+  
   let todos = listaOl.children
   for (let i = 0; i < todos.length; i += 1){
     todos[i].addEventListener('click', mudaFundo)
     todos[i].addEventListener('dblclick', riscaItem);
   }
-  // item.addEventListener('click', mudaFundo)
-  // item.addEventListener('dblclick', riscaItem);
 
-  const botaoLimpar = document.getElementById('apaga-tudo');
   botaoLimpar.addEventListener('click', limpaLista);
-
-  const botaoUp = document.getElementById('mover-cima');
   botaoUp.addEventListener('click', moveUp)
-
-  const botaoDown = document.getElementById('mover-baixo');
   botaoDown.addEventListener('click', moveDown)
-
-  const botaoCompletos = document.getElementById('remover-finalizados');
   botaoCompletos.addEventListener('click', removeCompletos)
-
-  const botaoSalvar = document.getElementById('salvar-tarefas'); 
   botaoSalvar.addEventListener('click', jogaProLocal);
-
-  const botaoRemover = document.getElementById('remover-selecionado');
   botaoRemover.addEventListener('click', removeTarefa)
 }
 
@@ -175,7 +143,6 @@ botaoAdicionar.addEventListener('click', adicionaTarefa);
 let todos = listaOl.children
 for (let i = 0; i < todos.length; i += 1){
   todos[i].addEventListener('click', mudaFundo)
-
   todos[i].addEventListener('dblclick', riscaItem);
 }
 
@@ -188,6 +155,18 @@ function pegaDoLocal() {
     for (let i = 0; i < itensLista.length; i += 1) {
       listaOl.innerHTML += itensLista[i]
     }
+    let todos = listaOl.children
+    for (let i = 0; i < todos.length; i += 1){
+      todos[i].addEventListener('click', mudaFundo)
+      todos[i].addEventListener('dblclick', riscaItem);
+    }
+
+    botaoLimpar.addEventListener('click', limpaLista);
+    botaoUp.addEventListener('click', moveUp)
+    botaoDown.addEventListener('click', moveDown)
+    botaoCompletos.addEventListener('click', removeCompletos)
+    botaoSalvar.addEventListener('click', jogaProLocal);
+    botaoRemover.addEventListener('click', removeTarefa)
   }
 }
 
