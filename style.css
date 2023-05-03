@@ -1,12 +1,142 @@
-/* * {
+* {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
-} */
+}
+
+header {
+  margin: 40px 0px 50px 0px;
+}
+
+#funcionamento2 {
+  margin-bottom: 50px;
+}
+
+input {
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 20px;
+}
+
+ol li {
+  margin-inline: 30%;
+  text-align: left;
+  list-style-position: inside;
+}
+
+ol li span {
+  margin-left: 10px;
+}
+
+button {
+  border: none;
+  padding: 10px;
+  font-size: medium;
+  border-radius: 10px;
+}
 
 .completed {
-  text-decoration: line-through solid black;
+  text-decoration: line-through solid black 1.5px;
+  font-style: italic;
 }
 
 .selected {
-  background-color: gray;
+  background-color: rgb(173, 173, 173);
+  color: white;
+  border-radius: 10px;
+  padding-inline: 10px;
+}
+
+.selected.completed {
+  text-decoration: line-through solid white 1.5px;
+}
+
+#criar-tarefa {
+  background-color: rgb(107, 107, 107);
+  color: white;
+  transition: 0.3s;
+}
+
+#criar-tarefa:hover {
+  background-color: rgb(180, 180, 180);
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+#mover-cima,
+#mover-baixo {
+  background-color: rgb(123, 155, 180);
+  color: white;
+  transition: 0.3s;
+}
+
+#mover-cima:hover,
+#mover-baixo:hover {
+  background-color: rgb(23, 98, 155);
+  color: white;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+#remover-selecionado,
+#remover-finalizados {
+  background-color: rgb(123, 155, 180);
+  color: white;
+  transition: 0.3s;
+}
+
+#remover-selecionado:hover,
+#remover-finalizados:hover {
+  background-color: rgb(23, 98, 155);
+  color: white;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+#apaga-tudo {
+  background-color: rgb(216, 123, 123);
+  color: white;
+  transition: 0.3s;
+}
+
+#apaga-tudo:hover {
+  background-color: rgb(228, 70, 70);
+  color: white;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+#salvar-tarefas {
+  background-color: rgb(150, 199, 122);
+  color: white;
+  transition: 0.3s;
+}
+
+#salvar-tarefas:hover {
+  background-color: rgb(82, 165, 34);
+  color: white;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.handle1 {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+  margin: 50px auto 20px auto;
+}
+
+.remove {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: space-evenly;
+}
+
+.handle2 {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 30%;
+  margin-inline: auto;
 }

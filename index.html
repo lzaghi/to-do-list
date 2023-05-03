@@ -13,6 +13,9 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
@@ -20,25 +23,42 @@
     <h1>Minha Lista de Tarefas</h1>
   </header>
 
-  <p id="funcionamento">Clique duas vezes em um item para marcá-lo como completo</p>
+  <p id="funcionamento1">Clique uma vez em um item para selecioná-lo</p>
+  <p id="funcionamento2">Clique duas vezes em um item para marcá-lo como completo</p>
 
-  <input type="text" id="texto-tarefa">
+  <input type="text" id="texto-tarefa" placeholder="Digite sua tarefa aqui!">
 
   <button id="criar-tarefa">Adicionar</button>
 
   <ol id="lista-tarefas"></ol>
 
-  <button id="remover-selecionado">X</button>
+  <div class="handle1">
+    <div class="move">
+      <button id="mover-cima">
+        <span class="material-symbols-outlined">
+          expand_less
+        </span>
+      </button>
 
-  <button id="mover-cima">Up</button>
+      <button id="mover-baixo">
+        <span class="material-symbols-outlined">
+          expand_more
+        </span>
+      </button>
+    </div>
 
-  <button id="mover-baixo">Down</button>
+    <div class="remove">
+      <button id="remover-selecionado">Remove selecionado</button>
 
-  <button id="remover-finalizados">Limpar completos</button>
+      <button id="remover-finalizados">Remove completos</button>
+    </div>
+  </div>
 
-  <button id="apaga-tudo">Limpar lista</button>
+  <div class="handle2">
+    <button id="apaga-tudo">Limpar lista</button>
 
-  <button id="salvar-tarefas">Salvar lista</button>
+    <button id="salvar-tarefas">Salvar lista</button>
+  </div>
 
   <script src="./script.js"></script>
 </body>

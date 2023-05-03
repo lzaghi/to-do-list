@@ -9,7 +9,7 @@ const botaoSalvar = document.getElementById('salvar-tarefas');
 const botaoRemover = document.getElementById('remover-selecionado');
 
 function mudaFundo(event) {
-  const itensLi = document.getElementsByClassName('item')
+  const itensLi = document.getElementsByClassName('span')
 
   for (let i = 0; i < itensLi.length; i+= 1){
     if (itensLi[i].classList.contains('selected')) {
@@ -45,7 +45,7 @@ function removeCompletos() {
 
   if (completos.length > 0) {
     for (let i = completos.length - 1; i >= 0; i -= 1) {
-      completos[i].remove()
+      completos[i].parentNode.remove()
     }
   }
 }
@@ -54,7 +54,7 @@ function removeTarefa() {
   const selecionado = document.querySelector('.selected')
 
   if (selecionado !== null) {
-    selecionado.remove()
+    selecionado.parentNode.remove()
   }
 }
 
@@ -75,10 +75,10 @@ function moveUp() {
   for (let ji = 0; ji < listaOl.children.length; ji += 1){
     array.push(listaOl.children[ji])
   }
-  if (selected != listaOl.children[0]) {
+  if (selected.parentNode != listaOl.children[0]) {
     let indexSel;
     for (let i = 0; i < array.length; i += 1) {
-      if (array[i] == selected) {
+      if (array[i] == selected.parentNode) {
         indexSel = i
       }
     }
@@ -98,10 +98,10 @@ function moveDown() {
   for (let ji = 0; ji < listaOl.children.length; ji += 1){
     array.push(listaOl.children[ji])
   }
-  if (selected != listaOl.children[listaOl.children.length-1]) {
+  if (selected.parentNode != listaOl.children[listaOl.children.length-1]) {
     let indexSel;
     for (let i = 0; i < array.length; i += 1) {
-      if (array[i] == selected) {
+      if (array[i] == selected.parentNode) {
         indexSel = i
       }
     }
@@ -116,35 +116,45 @@ function moveDown() {
 }
 
 function adicionaTarefa() {
-  const item = document.createElement('li');
-  item.innerHTML = input.value;
-  item.className = 'item'
-  
-  listaOl.appendChild(item);
+  if (input.value) {
+    const item = document.createElement('li');
+    item.className = 'item'
 
-  input.value = '';
-  
-  let todos = listaOl.children
-  for (let i = 0; i < todos.length; i += 1){
-    todos[i].addEventListener('click', mudaFundo)
-    todos[i].addEventListener('dblclick', riscaItem);
+    const span = document.createElement('span')
+    span.className = 'span'
+    span.innerHTML = input.value;
+    
+    item.appendChild(span)
+    listaOl.appendChild(item);
+
+    input.value = '';
+    
+    let todos = document.getElementsByClassName('span')
+    for (let i = 0; i < todos.length; i += 1){
+      todos[i].addEventListener('click', mudaFundo)
+      todos[i].addEventListener('dblclick', riscaItem);
+    }
+
+    botaoLimpar.addEventListener('click', limpaLista);
+    botaoUp.addEventListener('click', moveUp)
+    botaoDown.addEventListener('click', moveDown)
+    botaoCompletos.addEventListener('click', removeCompletos)
+    botaoSalvar.addEventListener('click', jogaProLocal);
+    botaoRemover.addEventListener('click', removeTarefa)
   }
-
-  botaoLimpar.addEventListener('click', limpaLista);
-  botaoUp.addEventListener('click', moveUp)
-  botaoDown.addEventListener('click', moveDown)
-  botaoCompletos.addEventListener('click', removeCompletos)
-  botaoSalvar.addEventListener('click', jogaProLocal);
-  botaoRemover.addEventListener('click', removeTarefa)
+  
 }
 
 botaoAdicionar.addEventListener('click', adicionaTarefa);
+input.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') adicionaTarefa()
+})
 
-let todos = listaOl.children
-for (let i = 0; i < todos.length; i += 1){
-  todos[i].addEventListener('click', mudaFundo)
-  todos[i].addEventListener('dblclick', riscaItem);
-}
+// let todos = listaOl.children
+// for (let i = 0; i < todos.length; i += 1){
+//   todos[i].addEventListener('click', mudaFundo)
+//   todos[i].addEventListener('dblclick', riscaItem);
+// }
 
 
 function pegaDoLocal() {
@@ -155,7 +165,7 @@ function pegaDoLocal() {
     for (let i = 0; i < itensLista.length; i += 1) {
       listaOl.innerHTML += itensLista[i]
     }
-    let todos = listaOl.children
+    let todos = document.getElementsByClassName('span')
     for (let i = 0; i < todos.length; i += 1){
       todos[i].addEventListener('click', mudaFundo)
       todos[i].addEventListener('dblclick', riscaItem);
