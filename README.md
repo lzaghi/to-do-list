@@ -1,5 +1,5 @@
 
-# Color Guess
+# To Do List
 
 Essa é uma aplicação de lista de tarefas dinâmica, que possibilita o usuário a adicionar e remover itens, alterar suas ordens, marcá-los como concluídos, e salvar a lista para acesso futuro.
 
